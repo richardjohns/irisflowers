@@ -28,10 +28,31 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
 
 # b) Load dataset
+filename = 'iris.data.csv'
+names = ['sepal-length', 'sepal-width', 'petal-length', 'petal-width', 'class'] 
+dataset = read_csv(filename, names=names)
 
 # 2. Summarize Data
+
 # a) Descriptive statistics
+print(dataset.shape)
+print(dataset.head(20))
+print(dataset.describe())
+print(dataset.groupby('class').size())
+
 # b) Data visualizations
+# Univariate plots to better understand each attribute.
+# box and whisker plots
+dataset.plot(kind='box', subplots=True, layout=(2,2), sharex=False, sharey=False) 
+pyplot.show()
+# histograms to get an idea of the distribution - where Gaussian, we can use algos to exploit this assumption
+dataset.hist()
+pyplot.show()
+
+# Multivariate plots to better understand the relationships between attributes
+# scatter plot matrix to spot structured relationships between input pairs
+scatter_matrix(dataset)
+pyplot.show()
 
 # 3. Prepare Data
 # a) Data Cleaning
